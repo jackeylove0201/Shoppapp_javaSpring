@@ -17,7 +17,7 @@ import java.util.List;
 public class Categorycontroller {
     // hiển thị tất cả các categories
     @GetMapping("")
-    public ResponseEntity<String> getAllCategories(
+    public ResponseEntity<String> getCategories(
             @RequestParam("page") int page,  // page = 1
             @RequestParam("limit") int limit // limit = 12
     ){ // http://localhost:8088/api/v1/categories?page=1&limit=12
