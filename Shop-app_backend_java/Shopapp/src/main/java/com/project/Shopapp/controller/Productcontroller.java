@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequestMapping("api/v1/products")
 @RestController
-@Validated
+//@Validated
 public class Productcontroller {
 
     @GetMapping("")
@@ -37,7 +37,7 @@ public class Productcontroller {
         if(result.hasErrors()){
             List<String> errorMessage = result.getFieldErrors()
                     .stream()
-                    .map(FieldError::getDefaultMessage)
+                    .map(fieldError -> fieldError.getDefaultMessage())
                     .toList();
              return ResponseEntity.badRequest().body(errorMessage);
 
