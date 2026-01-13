@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,8 +59,12 @@ public class Productcontroller {
                         .toList();
                 return ResponseEntity.badRequest().body(errorMessage);
             }
-            MultipartFile file = product.getFile();
-            if(file != null){
+            List<MultipartFile> files = product.getFiles();
+            files = files == null ? new ArrayList<MultipartFile>() : files;
+            for(MultipartFile file: files){
+                if(file.getSize() ==0){
+                    continue;
+                }
                 if(file.getSize() > 10 * 1024 * 1024){
                     return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body("File is too large maximum");
                 }
@@ -70,6 +75,7 @@ public class Productcontroller {
                 // luu file
                 String fileName = storedFile(file);
                 // luu vao doi tung trong DB
+                // luu vao bang product_images
             }
 
 
